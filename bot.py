@@ -13,6 +13,7 @@ from pathlib import Path
 import dateparser
 import ollama
 from dotenv import load_dotenv
+from gmail_tool import check_unread_email
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
     ApplicationBuilder,
@@ -173,7 +174,17 @@ def write_file(filename: str, content: str) -> str:
 
 TOOLS = {
     f.__name__: f
-    for f in (add_reminder, add_note, list_reminders, get_time, open_app, list_files, read_file, write_file)
+    for f in (
+        add_reminder,
+        add_note,
+        list_reminders,
+        get_time,
+        open_app,
+        list_files,
+        read_file,
+        write_file,
+        check_unread_email,
+    )
 }
 
 
@@ -228,6 +239,8 @@ def handle_command(user):
     if user == "/clear":
         q("DELETE FROM messages", commit=True)
         return "Chat history cleared. Facts, notes and reminders kept."
+    if user == "/mail":
+        return check_unread_email()
     return None
 
 
