@@ -1,0 +1,6 @@
+.env
+assistant.db
+workspace/
+.venv/
+__pycache__/
+*.bak
