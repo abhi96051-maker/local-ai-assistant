@@ -4,3 +4,6 @@ workspace/
 .venv/
 __pycache__/
 *.bak
+credentials.json
+token.json
+client_secret*.json
