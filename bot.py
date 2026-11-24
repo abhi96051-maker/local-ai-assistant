@@ -265,6 +265,8 @@ def chat_turn(user):
                 result = f"ERROR: unknown tool '{name}'"
             shown = {k: (v[:60] if isinstance(v, str) else v) for k, v in args.items()}
             print(f"  [tool: {name} {shown} -> {str(result)[:100]}]")
+            if name == "check_unread_email" and not str(result).startswith("ERROR"):
+                return str(result)
             messages.append({"role": "tool", "tool_name": name, "content": str(result)})
     return "Sorry, I got stuck. Please try again."
 

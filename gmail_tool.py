@@ -14,7 +14,7 @@ def check_unread_email(count: int = 5) -> str:
     Args:
         count: How many unread emails to list, from 1 to 10.
     """
-    count = max(1, min(int(count), 10))
+    count = 5
     if not TOKEN.exists():
         return "ERROR: Gmail is not authorised. Ask the user to run gmail_auth.py first."
     creds = Credentials.from_authorized_user_file(str(TOKEN), SCOPES)
